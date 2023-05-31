@@ -2,13 +2,16 @@ server:
   port: 8999
 
 eureka:
-  instance:
-    hostname: apigateway
   client:
-    serviceUrl: 
-      defaultZone:http://eureka-server:8761/eureka/
-    register-with-eureka: true
-    fetch-register : true
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    hostname: eureka-server
+    statusPageUrl: https://${eureka.hostname}/info
+    healthCheckUrl: https://${eureka.hostname}/health
+    homePageUrl: https://${eureka.hostname}/
  
 
 
@@ -26,3 +29,5 @@ spring:
           uri: lb://contact-service
           predicates:
             - Path=/contact/**
+
+
